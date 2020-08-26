@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
+import './Question.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,15 +8,15 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
     // createState () method returns a state object
     // connected to a stateful widget.
   }
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
   int questionIndex = 0;
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       questionIndex = questionIndex + 1;
     });
@@ -28,52 +28,78 @@ class MyAppState extends State<MyApp> {
     // home widget is what Flutter brings onto screen when widget is mounted.
 
     var questions = [
-      "Please select your underlying health conditions.",
+      "Please select your underlying health condition(s).",
       "What is your gender?",
     ];
 
     return MaterialApp(
       home: Scaffold(
           floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.cyan[300],
             child: Text(
-              "Hello World",
+              "Home",
               textAlign: TextAlign.center,
             ),
-            onPressed: answerQuestion,
+            onPressed: _answerQuestion,
           ),
           appBar: AppBar(
-            title: Text("Please answer the following questions."),
+            title: Text(
+              "Please answer the following questions.",
+              style: TextStyle(color: Colors.white),
+            ),
             backgroundColor: Colors.greenAccent,
           ),
           body: Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(questions[questionIndex]),
+                Question(questions[questionIndex]),
                 RaisedButton(
+                  padding: EdgeInsets.all(14),
                   child: Text(
                     "Diabetes (Type 1)",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: answerQuestion,
-                  color: Colors.blueGrey,
+                  onPressed: _answerQuestion,
+                  color: Colors.blue[400],
                   // name of the function, which executes only on pressed.
                 ),
                 RaisedButton(
+                    padding: EdgeInsets.all(14),
                     child: Text("Diabetes (Type 2)",
                         style: TextStyle(color: Colors.white)),
-                    onPressed: answerQuestion,
-                    color: Colors.blueGrey),
+                    onPressed: _answerQuestion,
+                    color: Colors.blue[400]),
                 RaisedButton(
+                  padding: EdgeInsets.all(14),
                   child: Text(
                     "Obesity",
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: answerQuestion,
-                  color: Colors.blueGrey,
-                  // can also be onPressed: () => print("x"),
-                  // or onPressed: () {},
-                )
+                  onPressed: _answerQuestion,
+                  color: Colors.blue[400],
+                ),
+                RaisedButton(
+                  padding: EdgeInsets.all(14),
+                  child: Text(
+                    "Hypertension",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: _answerQuestion,
+                  color: Colors.blue[400],
+                ),
+                // can also be onPressed: () => print("x"),
+                // or onPressed: () {},
+                RaisedButton(
+                  padding: EdgeInsets.all(14),
+                  child: Text(
+                    "Pregnant",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: _answerQuestion,
+                  color: Colors.blue[400],
+                ),
               ],
             ),
           )),
