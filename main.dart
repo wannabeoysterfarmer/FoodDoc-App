@@ -1,11 +1,25 @@
+import 'package:MVP/Screens/Home/Components/body.dart';
+import 'package:MVP/Survey/answer.dart';
 import 'package:flutter/material.dart';
-import './Question.dart';
+import 'package:MVP/Survey/Question.dart';
+import 'package:flutter/semantics.dart';
+import 'Survey/answer.dart';
+import 'Survey/Quiz.dart';
+import 'package:MVP/constants.dart';
+import 'package:MVP/Screens/Home/Home-Screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+void openMyPage() {
+  BuildContext context;
+  Navigator.push(context,
+      MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+}
+
+class MyApp extends StatelessWidget {
+/*StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _MyAppState();
@@ -15,94 +29,90 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int questionIndex = 0;
+  var _questions = [
+    {
+      'text': 'Welcome! What would you like to do?',
+      'answer': [
+        "Scan QR Code",
+        "Sign Up",
+      ],
+    },
+  ];
+
+  int _questionIndex = 0;
   void _answerQuestion() {
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-  }
+  */
 
   @override
   // decorator - make code cleaner.
   Widget build(BuildContext context) {
     // home widget is what Flutter brings onto screen when widget is mounted.
 
-    var questions = [
-      "Please select your underlying health condition(s).",
-      "What is your gender?",
-    ];
-
-    return MaterialApp(
-      home: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.cyan[300],
-            child: Text(
-              "Home",
-              textAlign: TextAlign.center,
-            ),
-            onPressed: _answerQuestion,
-          ),
-          appBar: AppBar(
-            title: Text(
-              "Please answer the following questions.",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.greenAccent,
-          ),
-          body: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Question(questions[questionIndex]),
-                RaisedButton(
-                  padding: EdgeInsets.all(14),
-                  child: Text(
-                    "Diabetes (Type 1)",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: _answerQuestion,
-                  color: Colors.blue[400],
-                  // name of the function, which executes only on pressed.
-                ),
-                RaisedButton(
-                    padding: EdgeInsets.all(14),
-                    child: Text("Diabetes (Type 2)",
-                        style: TextStyle(color: Colors.white)),
-                    onPressed: _answerQuestion,
-                    color: Colors.blue[400]),
-                RaisedButton(
-                  padding: EdgeInsets.all(14),
-                  child: Text(
-                    "Obesity",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: _answerQuestion,
-                  color: Colors.blue[400],
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.all(14),
-                  child: Text(
-                    "Hypertension",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: _answerQuestion,
-                  color: Colors.blue[400],
-                ),
-                // can also be onPressed: () => print("x"),
-                // or onPressed: () {},
-                RaisedButton(
-                  padding: EdgeInsets.all(14),
-                  child: Text(
-                    "Pregnant",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: _answerQuestion,
-                  color: Colors.blue[400],
-                ),
-              ],
-            ),
-          )),
-    );
+    return new MaterialApp(home: new Main2());
   }
 }
+
+class Main2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.all(60),
+              ),
+              Text(
+                "Pod",
+                style: TextStyle(
+                    fontFamily: "Righteous", fontSize: 30, color: Colors.green),
+              ),
+              Container(
+                margin: EdgeInsets.all(4),
+              ),
+              Text("contactless technology made for you",
+                  style: TextStyle(fontSize: 15)),
+              Container(
+                margin: EdgeInsets.all(10),
+              ),
+              Image.asset("Assets/Images/sizzle.png"),
+              Container(
+                margin: EdgeInsets.all(60),
+              ),
+              Container(
+                  child: Column(
+                children: [
+                  RaisedButton(
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.blue[300],
+                      onPressed: () {}),
+                  RaisedButton(
+                      child: Text("Scan QR Code",
+                          style: TextStyle(color: Colors.white)),
+                      color: Colors.blue[300],
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                      }),
+                ],
+              )),
+            ],
+          ),
+        ) // make a new .dart file for main page of the app.
+
+        );
+  }
+}
+// final - value wont change once it is given the value.
+// const - wont change at all, set, not need to be given by something. already
+// given.
+// var - can change
